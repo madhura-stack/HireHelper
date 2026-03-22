@@ -1,0 +1,226 @@
+/* ===============================
+   PAGE LAYOUT
+================================ */
+.mytasks-page {
+  display: flex;
+  min-height: 100vh;
+}
+
+.mytasks-content {
+  flex: 1;
+  padding: 24px 32px;
+  background: linear-gradient(to bottom, #c5f9ff, #7adfe3);
+
+  font-family: -apple-system, BlinkMacSystemFont,
+    'Segoe UI', Roboto, Oxygen, Ubuntu,
+    Cantarell, sans-serif;
+  font-family: poppins;
+}
+
+/* ===============================
+   HEADER
+================================ */
+.mytasks-header {
+  background: #ffffff;
+  padding: 20px 24px;
+  border-radius: 14px;
+  margin-bottom: 24px;
+
+  /* 🔥 NEW: supports Notification */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.mytasks-header h2 {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 600;
+}
+
+.mytasks-header p {
+  margin-top: 4px;
+  font-size: 14px;
+  color: #666;
+}
+
+/* ===============================
+   GRID
+================================ */
+.mytasks-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 24px;
+  align-items: start;
+  justify-content: start; /* 🔥 prevents centering */
+}
+
+/* ===============================
+   CARD (POP)
+================================ */
+.mytasks-card {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 14px;
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.08);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  cursor: pointer;
+}
+
+.mytasks-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.15);
+}
+
+/* ===============================
+   IMAGE CONTAINER (POP)
+================================ */
+.mytasks-image {
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 10px;
+  transition: transform 0.25s ease;
+}
+
+.mytasks-card:hover .mytasks-image {
+  transform: translateY(-2px);
+}
+
+.mytasks-image img {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  display: block;
+}
+
+/* ===============================
+   TAGS
+================================ */
+.mytasks-tags {
+  display: flex;
+  gap: 10px;
+  margin: 10px 0;
+}
+
+.mytasks-tag {
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.mytasks-tag.category {
+  background: #dbe7ff;
+  color: #2f55d4;
+}
+
+.mytasks-tag.status {
+  background: #d9f5d3;
+  color: #2f8f2f;
+}
+
+/* ===============================
+   TEXT
+================================ */
+.mytasks-title {
+  font-size: 15px;
+  margin: 6px 0;
+}
+
+.mytasks-desc {
+  font-size: 13px;
+  color: #555;
+  line-height: 1.4;
+}
+
+.mytasks-info {
+  margin-top: 10px;
+  font-size: 12px;
+  color: #666;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+/* ===============================
+   MOBILE
+================================ */
+.menu-btn {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .menu-btn {
+      display: block !important;
+    position: fixed;        /* 🔥 float above content */
+    top: 16px;
+    right: 16px;            /* 🔥 push to right */
+    z-index: 1105;
+
+    background: white;
+    border: none;
+    padding: 10px 14px;
+    border-radius: 10px;
+    font-size: 22px;
+    cursor: pointer;
+
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  }
+
+  .mytasks-grid {
+    grid-template-columns: 1fr;
+  }
+}
+/* My Tasks card */
+.mytasks-card {
+  position: relative;
+  background: #fff;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+/* Info section */
+.mytasks-info {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 13px;
+  color: #444;
+}
+
+/* Delete button fixed at bottom-right */
+.mytasks-delete-btn {
+  position: absolute;
+  bottom: 14px;
+  right: 14px;
+
+  padding: 6px 14px;
+  font-size: 12px;
+  border-radius: 999px;
+
+  border: 1px solid #ff4d4f;
+  background: transparent;
+  color: #ff4d4f;
+
+  cursor: pointer;
+
+  opacity: 0;
+  transform: translateY(6px);
+  transition: all 0.25s ease;
+}
+
+/* Show on hover */
+.mytasks-card:hover .mytasks-delete-btn {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Hover effect */
+.mytasks-delete-btn:hover {
+  background: #ff4d4f;
+  color: #fff;
+}
