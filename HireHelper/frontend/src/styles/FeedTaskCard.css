@@ -1,0 +1,97 @@
+.feed-card {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 14px;
+  display: flex;
+  gap: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.feed-card-image {
+  width: 90px;
+  height: 90px;
+  border-radius: 12px;
+  object-fit: cover;
+}
+
+.feed-card-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.feed-tag {
+  background: #eef2ff;
+  color: #4f46e5;
+  font-size: 12px;
+  padding: 3px 10px;
+  border-radius: 10px;
+  width: fit-content;
+}
+
+.feed-title {
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.feed-desc {
+  font-size: 13px;
+  color: #555;
+}
+
+.feed-meta {
+  font-size: 12px;
+  color: #666;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.feed-footer {
+  margin-top: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.feed-user {
+  font-size: 12px;
+  color: #444;
+}
+
+.feed-request-btn {
+  background: #22c55e;
+  color: white;
+  border: none;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.feed-request-btn:hover {
+  background: #16a34a;
+}
+/* ===== FEED & MY TASKS IMAGE BASE ===== */
+
+.task-image,
+.mytasks-img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;       /* real images */
+  border-radius: 12px;
+}
+
+/* ===== DEFAULT PLACEHOLDER (BOTH PAGES) ===== */
+.task-image.default-image,
+.mytasks-img.default-image {
+  object-fit: contain;     /* ✅ NO CROP */
+  padding: 14px;
+  background: linear-gradient(
+    135deg,
+    rgba(125, 227, 234, 0.7),
+    rgba(0, 180, 216, 0.7)
+  );
+  filter: grayscale(100%) brightness(1.1);
+}
