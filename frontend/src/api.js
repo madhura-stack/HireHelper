@@ -11,7 +11,7 @@ export const setLoader = (setLoading) => {
 };
 
 const API = axios.create({
-  baseURL: "https://hirehelper-21jb.onrender.com/api",
+  baseURL: "https://hirehelper-21jb.onrender.com/",
   withCredentials: false, // keep false unless using cookies
 });
 
