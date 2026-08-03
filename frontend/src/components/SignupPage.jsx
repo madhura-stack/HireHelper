@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from "react";
-import "../styles/Signup.css";
+import "../styles/signup.css";
 import logoImage from "../assets/logo.png";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import { Link, useNavigate } from "react-router-dom";
