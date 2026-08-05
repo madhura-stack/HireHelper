@@ -103,15 +103,21 @@ export const verifyOtp = async (req, res) => {
 /* ================= LOGIN ================= */
 export const login = async (req, res) => {
   try {
-    const { email, password, remember } = req.body; // 🔥 receive remember flag
+    const { email, password, remember } = req.body; 
+    // 🔥 receive remember flag
+    console.log("LOGIN REQUEST");
+    console.log("Email:", email);
+    console.log("Password received:", password);
 
     const user = await User.findOne({ email }).select("+password");
+    console.log("User found:", !!user);
     if (!user) return res.status(404).json({ message: "User not found" });
-
+    
     if (!user.isVerified)
       return res.status(401).json({ message: "Email not verified" });
 
     const isMatch = await bcrypt.compare(password, user.password);
+    console.log("Password Match:", isMatch);
     if (!isMatch)
       return res.status(400).json({ message: "Invalid credentials" });
 
