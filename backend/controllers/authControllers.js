@@ -96,6 +96,7 @@ export const verifyOtp = async (req, res) => {
     });
 
   } catch (error) {
+    console.error("VERIFY OTP ERROR:", error);
     res.status(500).json({ error: error.message });
   }
 };
