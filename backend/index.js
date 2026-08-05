@@ -28,6 +28,10 @@ app.use(
   })
 );
 app.use(express.json());
+app.use((req, res, next) => {
+  console.log(`${req.method} ${req.originalUrl}`);
+  next();
+});
 
 // ================= ROUTES =================
 app.use("/api/auth", authRoutes);
