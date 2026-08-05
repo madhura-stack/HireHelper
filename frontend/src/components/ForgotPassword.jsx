@@ -74,7 +74,7 @@ const ForgotPassword = () => {
       setSending(true);
 
       await axios.post(
-        "http://localhost:5000/api/auth/forgot-password",
+        "https://hirehelper-21jb.onrender.com/api/auth/reset-password",
         { email }
       );
 
@@ -97,7 +97,7 @@ const ForgotPassword = () => {
   try {
     // 🔐 VERIFY OTP WITH BACKEND
     await axios.post(
-      "http://localhost:5000/api/auth/verify-reset-otp",
+      "https://hirehelper-21jb.onrender.com/api/auth/verify-reset-otp",
       { email, otp }
     );
 

@@ -88,7 +88,7 @@ const LoginPage = () => {
 
   /* ---------------- GOOGLE LOGIN ---------------- */
   const signInWithGoogle = () => {
-    window.location.href = "http://localhost:5000/auth/google";
+    window.location.href = "https://hirehelper-21jb.onrender.com/api/auth/google";
   };
 
   /* ---------------- UI ---------------- */
