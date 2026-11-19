@@ -17,6 +17,14 @@ const ResetPassword = () => {
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
 
+if (!newPassword || !confirmPassword) {
+  return alert("Please fill in both password fields");
+}
+
+if (newPassword !== confirmPassword) {
+  return alert("Passwords do not match");
+}
+
   // 🔒 Safety redirect
   useEffect(() => {
     if (!email) {
