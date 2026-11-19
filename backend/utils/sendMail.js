@@ -3,7 +3,7 @@ import nodemailer from "nodemailer";
 
 const sendMail = async (email, otp) => {
   if (!process.env.EMAIL_USER || !process.env.EMAIL_PASS) {
-    throw new Error("Email credentials are missing in Render");
+    throw new Error("EMAIL_USER or EMAIL_PASS is missing");
   }
 
   const transporter = nodemailer.createTransport({
@@ -14,7 +14,6 @@ const sendMail = async (email, otp) => {
     },
   });
 
-  // Verify Gmail connection
   await transporter.verify();
 
   const info = await transporter.sendMail({
@@ -22,20 +21,14 @@ const sendMail = async (email, otp) => {
     to: email,
     subject: "HireHelper - OTP Verification",
     html: `
-      <div style="font-family: Arial; padding: 20px;">
-        <h2>Welcome to HireHelper!</h2>
-        <p>Your email verification OTP is:</p>
-        <h1 style="color: #2563eb; letter-spacing: 5px;">
-          ${otp}
-        </h1>
-        <p>This OTP expires in 10 minutes.</p>
-        <p>Please do not share this OTP with anyone.</p>
-      </div>
+      <h2>HireHelper Email Verification</h2>
+      <p>Your OTP is:</p>
+      <h1>${otp}</h1>
+      <p>This OTP expires in 10 minutes.</p>
     `,
   });
 
   console.log("OTP email sent:", info.messageId);
-
   return info;
 };
 
