@@ -1,47 +1,42 @@
+
 import nodemailer from "nodemailer";
 
 const sendMail = async (email, otp) => {
-  // 🔥 ALWAYS log OTP for dev / submission safety
-  console.log("======================================");
-  console.log("📧 OTP REQUEST");
-  console.log("👤 Email:", email);
-  console.log("🔐 OTP :", otp);
-  console.log("======================================");
-
-  // Try sending email, but NEVER break auth flow if it fails
-  try {
-    // If Gmail credentials are missing, skip email silently
-    if (!process.env.EMAIL_USER || !process.env.EMAIL_PASS) {
-      console.warn("⚠️ EMAIL SKIPPED: Gmail credentials missing");
-      return;
-    }
-
-    const transporter = nodemailer.createTransport({
-      service: "gmail",
-      auth: {
-        user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PASS, // Gmail App Password
-      },
-    });
-
-    const info = await transporter.sendMail({
-      from: `"HireHelper 🔐" <${process.env.EMAIL_USER}>`,
-      to: email,
-      subject: "🔐 HireHelper | OTP Verification",
-      html: `
-        <h2>HireHelper OTP Verification</h2>
-        <p>Your OTP is:</p>
-        <h1>${otp}</h1>
-        <p>This OTP is valid for 10 minutes.</p>
-      `,
-    });
-
-    console.log("✅ Email sent successfully (Gmail)");
-    console.log("📨 Message ID:", info.messageId);
-  } catch (error) {
-    // ❌ DO NOT throw — allow signup / reset to continue
-    console.warn("⚠️ Email failed, using terminal OTP only");
+  if (!process.env.EMAIL_USER || !process.env.EMAIL_PASS) {
+    throw new Error("Email credentials are missing in Render");
   }
+
+  const transporter = nodemailer.createTransport({
+    service: "gmail",
+    auth: {
+      user: process.env.EMAIL_USER,
+      pass: process.env.EMAIL_PASS,
+    },
+  });
+
+  // Verify Gmail connection
+  await transporter.verify();
+
+  const info = await transporter.sendMail({
+    from: `"HireHelper" <${process.env.EMAIL_USER}>`,
+    to: email,
+    subject: "HireHelper - OTP Verification",
+    html: `
+      <div style="font-family: Arial; padding: 20px;">
+        <h2>Welcome to HireHelper!</h2>
+        <p>Your email verification OTP is:</p>
+        <h1 style="color: #2563eb; letter-spacing: 5px;">
+          ${otp}
+        </h1>
+        <p>This OTP expires in 10 minutes.</p>
+        <p>Please do not share this OTP with anyone.</p>
+      </div>
+    `,
+  });
+
+  console.log("OTP email sent:", info.messageId);
+
+  return info;
 };
 
 export default sendMail;

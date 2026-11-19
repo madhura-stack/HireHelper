@@ -13,25 +13,34 @@ import taskRoutes from "./routes/taskRoutes.js";
 import requestRoutes from "./routes/requestRoutes.js";
 import notificationRoutes from "./routes/notificationRoutes.js";
 
-// Connect MongoDB
-connectDB();
+
 
 const app = express();
 
 // Middlewares
-app.use(
-  cors({
-    origin: "https://hire-helper-omega.vercel.app",
-    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-    allowedHeaders: ["Content-Type", "Authorization"],
-    credentials: false,
-  })
-);
+// CORS configuration
+const corsOptions = {
+  origin: "https://hire-helper-omega.vercel.app",
+  methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization"],
+  credentials: false,
+};
+// Apply CORS before routes
+app.use(cors(corsOptions));
+app.options(/.*/, cors(corsOptions));
+
+// Body parsing
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+// Request logging
 app.use((req, res, next) => {
   console.log(`${req.method} ${req.originalUrl}`);
   next();
 });
+
+// Connect MongoDB
+connectDB();
 
 // ================= ROUTES =================
 app.use("/api/auth", authRoutes);
